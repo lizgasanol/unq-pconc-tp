@@ -22,7 +22,7 @@ public class ThreadPool {
         lo que impactaría el aprovechamiento de la concurrencia
          */
         for(int i = 0; i < cantidadDeThreads; i++) {
-            workers[i] = new Worker(buffer, counter);;
+            workers[i] = new Worker(buffer, counter);
         }
         for(Worker worker : this.workers) {
             worker.start();
