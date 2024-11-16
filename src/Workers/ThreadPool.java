@@ -17,15 +17,10 @@ public class ThreadPool {
     }
 
     public void start() {
-        /*
-        No se startean los workers en este for, ya que al no estar todos creados aun se inicializarian secuencialmente
-        lo que impactaría el aprovechamiento de la concurrencia
-         */
         for(int i = 0; i < cantidadDeThreads; i++) {
-            workers[i] = new Worker(buffer, counter);
-        }
-        for(Worker worker : this.workers) {
-            worker.start();
+            Worker newWorker = new Worker(buffer, counter);
+            workers[i] = newWorker;
+            newWorker.start();
         }
     }
 }
