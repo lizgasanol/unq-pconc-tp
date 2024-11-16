@@ -1,10 +1,10 @@
 package Workers;
 
-//import Buffer.Buffer;
+import Buffer.Buffer;
 import Task.Task;
 
 public class Worker extends Thread {
-//    private final Buffer buffer;
+    private final Buffer buffer;
     private WorkerCounter contador;
 
     public Worker(Buffer buffer, WorkerCounter contador) {
@@ -16,7 +16,7 @@ public class Worker extends Thread {
         try {
             Task task;
             while (true) {
-                task = buffer.read();
+                task = (Task) buffer.read();
                 this.resolveTask(task);
             }
         } catch (Exception ex) {

@@ -1,7 +1,9 @@
+package Buffer;
+
 public class Buffer {
 
     private final Integer tamano_buffer;
-    private final Object[] current_buffer;
+    private Object[] current_buffer;
     private int begin = 0, end = 0;
 
     public Buffer(Integer tamano_buffer) {
