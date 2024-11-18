@@ -17,17 +17,14 @@ public class MNISTask extends Task {
     public void run() {
         for (ArrayList<String> linea : lineas) {
             ArrayList<Double> resultados_linea = new ArrayList<Double>();
-            for (int i = 0; i < 785; i++) {
-                if (i == 0) {
-                    continue;
-                }
+            for (int i = 1; i < 785; i++) {
                 Integer x = Integer.parseInt(linea.get(i));
                 Integer y = Integer.parseInt(this.muestra.get(i));
                 resultados_linea.add(Math.pow(x - y, 2));
             }
             Double distancia_linea = 0.0;
-            for (Double i : resultados_linea) {
-                distancia_linea += i;
+            for (Double x : resultados_linea) {
+                distancia_linea += x;
             }
             this.distancias.add(distancia_linea);
         }

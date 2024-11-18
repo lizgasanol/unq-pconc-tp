@@ -3,18 +3,21 @@ package CSVReader;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 public class CSVReader {
 
-    public void read(Integer lineas) {
-        //TODO
+    public List<List<String>> read(Integer lineas) {
+        List<List<String>> resultado = new ArrayList<>();
         try (BufferedReader br = new BufferedReader(new FileReader("archivo.csv"))) {
             String line;
             for (int i =0; i < lineas; i ++) {
                 line = br.readLine();
                 String[] vals_str = line.split(",");
-                // En el array vals_str estan los valores, en tipo String
+                List<String> arreglo = new ArrayList<String>(List.of(vals_str));
+                resultado.add(arreglo);
+                return resultado;
             }
         } catch (
                 IOException e) {
