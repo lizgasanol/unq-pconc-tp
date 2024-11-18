@@ -17,12 +17,12 @@ public class CSVReader {
                 String[] vals_str = line.split(",");
                 List<String> arreglo = new ArrayList<String>(List.of(vals_str));
                 resultado.add(arreglo);
-                return resultado;
             }
         } catch (
                 IOException e) {
             throw new RuntimeException(e);
         }
+        return resultado;
     }
 
 }
