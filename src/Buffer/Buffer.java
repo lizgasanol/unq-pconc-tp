@@ -28,5 +28,5 @@ public class Buffer {
 
     private boolean isEmpty() { return this.begin == this.end; }
     private boolean isFull() { return next(this.begin) == this.end; }
-    private int next(int i) { return (i +1) %( this.tamano_buffer +1); }
+    private int next(int i) { return (i+1) % (this.tamano_buffer+1); }
 }
