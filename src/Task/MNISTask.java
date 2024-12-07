@@ -3,9 +3,7 @@ package Task;
 import AlmacenadorResultados.AlmacenadorResultados;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 public class MNISTask extends Task {
 
@@ -22,7 +20,7 @@ public class MNISTask extends Task {
     @Override
     public void run() {
         for (List<String> linea : lineas) {
-            List<Double> resultados_linea = new ArrayList<Double>();
+            List<Integer> resultados_linea = new ArrayList<>();
             int valor_linea = 0;
             for (int i = 0; i < 785; i++) {
                 if (i == 0) {
@@ -30,11 +28,11 @@ public class MNISTask extends Task {
                 } else {
                     Integer x = Integer.parseInt(linea.get(i));
                     Integer y = Integer.parseInt(this.muestra.get(i));
-                    resultados_linea.add(Math.pow(x - y, 2));
+                    resultados_linea.add((x - y) << 2);
                 }
             }
-            Double distancia_linea = 0.0;
-            for (Double x : resultados_linea) {
+            Integer distancia_linea = 0;
+            for (Integer x : resultados_linea) {
                 distancia_linea += x;
             }
             this.almacenadorResultados.agregarResultado(valor_linea,distancia_linea);
