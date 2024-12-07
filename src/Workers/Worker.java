@@ -22,7 +22,6 @@ public class Worker extends Thread {
         } catch (Exception ex) {
             System.out.println("FIN DEL WORKER");
             contador.decrementar();
-            interrupt();
         }
     }
 
