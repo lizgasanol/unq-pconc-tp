@@ -10,7 +10,9 @@ public class WorkerCounter {
 
     synchronized public void decrementar(){
         this.counter--;
-        notifyAll();
+        if(this.counter == 0){
+            notifyAll();
+        }
     }
     synchronized public void hayWorkersTrabajando() throws InterruptedException {
         while(this.counter != 0) {
