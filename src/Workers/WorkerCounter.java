@@ -4,7 +4,6 @@ public class WorkerCounter {
     private int counter;
 
     public WorkerCounter(int counter) {
-
         this.counter = counter;
     }
 
@@ -14,9 +13,14 @@ public class WorkerCounter {
             notifyAll();
         }
     }
-    synchronized public void hayWorkersTrabajando() throws InterruptedException {
+
+    synchronized public void incrementar(){
+        this.counter++;
+    }
+
+    synchronized public void esperarWorkersTrabajando() {
         while(this.counter != 0) {
-            wait();
+            try {wait();} catch (Exception e) { return; }
         }
     }
 }

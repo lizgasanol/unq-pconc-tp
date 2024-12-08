@@ -17,6 +17,7 @@ public class ThreadPool {
     public void start() {
         for(int i = 0; i < cantidadDeThreads; i++) {
             Worker newWorker = new Worker(buffer, counter);
+            counter.incrementar();
             newWorker.start();
         }
     }

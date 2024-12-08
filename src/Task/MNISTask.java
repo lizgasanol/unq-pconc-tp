@@ -1,6 +1,8 @@
 package Task;
 
-import AlmacenadorResultados.AlmacenadorResultados;
+import Resultados.AlmacenadorResultados;
+import KNNHandler.KNNHandler;
+import Resultados.Resultado;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -9,12 +11,15 @@ public class MNISTask extends Task {
 
     private List<List<String>> lineas;
     private List<String> muestra;
+    private List<Resultado> resultadosTask = new ArrayList<>();
     private AlmacenadorResultados almacenadorResultados;
+    private KNNHandler knnHandler;
 
-    public MNISTask(List<List<String>> lineas, List<String> muestra, AlmacenadorResultados almacenadorResultados){
+    public MNISTask(List<List<String>> lineas, List<String> muestra, AlmacenadorResultados almacenadorResultados, KNNHandler knnHandler){
         this.lineas = lineas;
         this.muestra = muestra;
         this.almacenadorResultados = almacenadorResultados;
+        this.knnHandler = knnHandler;
     }
 
     @Override
@@ -28,15 +33,16 @@ public class MNISTask extends Task {
                 } else {
                     Integer x = Integer.parseInt(linea.get(i));
                     Integer y = Integer.parseInt(this.muestra.get(i));
-                    resultados_linea.add((x - y) << 2);
+                    resultados_linea.add((x - y) * (x - y));
                 }
             }
             Integer distancia_linea = 0;
             for (Integer x : resultados_linea) {
                 distancia_linea += x;
             }
-            this.almacenadorResultados.agregarResultado(valor_linea,distancia_linea);
+            this.resultadosTask.add(new Resultado(valor_linea,distancia_linea));
         }
+        almacenadorResultados.agregarResultados(knnHandler.getKNN(this.resultadosTask));
     }
 
 }

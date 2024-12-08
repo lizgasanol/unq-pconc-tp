@@ -1,22 +1,25 @@
 package KNNHandler;
 
-import AlmacenadorResultados.AlmacenadorResultados;
+import Resultados.Resultado;
+import Resultados.ResultadoComparator;
 
 import java.util.*;
 
 public class KNNHandler {
 
-    private PriorityQueue<Integer> resultados;
+    private final int k;
 
-    public KNNHandler(AlmacenadorResultados almacenadorResultados) {
-        this.resultados = new PriorityQueue<>(Comparator.comparingDouble(almacenadorResultados.getResultados()::get));
-        resultados.addAll(almacenadorResultados.getResultados().keySet());
+    public KNNHandler(int k) {
+        this.k = k;
     }
 
-    public List<Integer> getKNN(int k) {
-        List<Integer> knn = new ArrayList<>();
-        for (int i = 0; i < k; i++) {
-            knn.add(this.resultados.poll());
+    public List<Resultado> getKNN(List<Resultado> distancias) {
+        PriorityQueue<Resultado> resultados = new PriorityQueue<>(new ResultadoComparator());
+        resultados.addAll(distancias);
+
+        List<Resultado> knn = new ArrayList<>();
+        for (int i = 0; i < this.k && !resultados.isEmpty(); i++) {
+            knn.add(resultados.poll());
         }
         return knn;
     }

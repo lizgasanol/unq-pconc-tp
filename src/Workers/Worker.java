@@ -20,7 +20,6 @@ public class Worker extends Thread {
                 this.resolveTask(task);
             }
         } catch (Exception ex) {
-            System.out.println("FIN DEL WORKER");
             contador.decrementar();
         }
     }
